@@ -5,12 +5,12 @@ const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const app = express();
-const PORT = 3000;
 
-app.use(cors({
-  origin: '*', // This allows requests from any origin
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
-})); // Enable CORS for all routes
+app.use(cors()); 
+
+app.get('/test', (req, res) => {
+  res.send('Server is working!');
+});
 
 app.get('/proxy-image', async (req, res) => {
   const { url } = req.query;
@@ -34,6 +34,7 @@ app.get('/proxy-image', async (req, res) => {
   }
 });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Proxy server running at http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
