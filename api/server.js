@@ -6,7 +6,7 @@ const fetch = (...args) =>
 
 const app = express();
 
-app.use(cors()); 
+app.use(cors());
 
 app.get('/test', (req, res) => {
   res.send('Server is working!');
@@ -25,7 +25,9 @@ app.get('/proxy-image', async (req, res) => {
       return res.status(response.status).send('Error fetching image: ' + response.statusText);
     }
 
-    const imageBuffer = await response.buffer();
+    // Use arrayBuffer() instead of buffer()
+    const imageArrayBuffer = await response.arrayBuffer();
+    const imageBuffer = Buffer.from(imageArrayBuffer); // Convert ArrayBuffer to Buffer
     res.set('Content-Type', response.headers.get('content-type'));
     res.send(imageBuffer);
   } catch (error) {
