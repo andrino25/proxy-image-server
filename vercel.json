@@ -9,7 +9,11 @@
   "routes": [
     {
       "src": "/api/proxy-image",
-      "dest": "api/server.js"
+      "dest": "api/server.js"  
+    },
+    {
+      "src": "/api/test",
+      "dest": "api/server.js"  
     }
   ]
 }
