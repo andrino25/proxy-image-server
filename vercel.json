@@ -8,7 +8,7 @@
   ],
   "routes": [
     {
-      "src": "/api/server(.*)",
+      "src": "/api/proxy-image",
       "dest": "api/server.js"
     }
   ]
