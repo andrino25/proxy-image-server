@@ -23,8 +23,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.head('/health', (req, res) => {
-  res.status(200).send(); // Respond with 200 OK and no body
+app.get('/keep-alive', (req, res) => {
+  res.json({ status: 'ok' }); // Responds with JSON on GET request
+});
+
+app.head('/keep-alive', (req, res) => {
+  res.json({ status: 'ok' }); // Responds with JSON on HEAD request
 });
 
 app.get('/test', (req, res) => {
