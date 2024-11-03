@@ -27,7 +27,7 @@ app.get('/keep-alive', (req, res) => {
   res.json({ status: 'ok' }); // Responds with JSON on GET request
 });
 
-app.head('/keep-alive', (req, res) => {
+app.head('/', (req, res) => {
   res.json({ status: 'ok' }); // Responds with JSON on HEAD request
 });
 
