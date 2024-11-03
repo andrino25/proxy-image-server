@@ -26,14 +26,19 @@ app.get('/proxy-image', async (req, res) => {
     const imageArrayBuffer = await response.arrayBuffer();
     const imageBuffer = Buffer.from(imageArrayBuffer);
 
+    // Add CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.set('Content-Type', response.headers.get('content-type'));
-    res.set('Access-Control-Allow-Origin', '*');  // Add this line to enable CORS
+
     res.send(imageBuffer);
   } catch (error) {
     console.error('Error fetching image:', error);
     res.status(500).send('Error fetching image');
   }
 });
+
 
 // Do not call app.listen() on Vercel
 module.exports = app;
