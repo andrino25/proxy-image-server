@@ -23,6 +23,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.head('/health', (req, res) => {
+  res.status(200).send(); // Respond with 200 OK and no body
+});
+
 app.get('/test', (req, res) => {
   res.send('Server is working!');
 });
