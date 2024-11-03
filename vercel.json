@@ -1,7 +1,20 @@
 {
     "version": 2,
     "builds": [
-      { "src": "api/server.js", "use": "@vercel/node" }
+      {
+        "src": "api/server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/proxy-image",
+        "dest": "api/server.js"
+      },
+      {
+        "src": "/api/test",
+        "dest": "api/server.js"
+      }
     ]
   }
   
