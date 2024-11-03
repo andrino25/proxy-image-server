@@ -12,6 +12,7 @@ app.get('/test', (req, res) => {
 
 app.get('/proxy-image', async (req, res) => {
   const { url } = req.query;
+
   if (!url) {
     return res.status(400).send('No URL provided');
   }
@@ -24,7 +25,9 @@ app.get('/proxy-image', async (req, res) => {
 
     const imageArrayBuffer = await response.arrayBuffer();
     const imageBuffer = Buffer.from(imageArrayBuffer);
+
     res.set('Content-Type', response.headers.get('content-type'));
+    res.set('Access-Control-Allow-Origin', '*');  // Add this line to enable CORS
     res.send(imageBuffer);
   } catch (error) {
     console.error('Error fetching image:', error);
