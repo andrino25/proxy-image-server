@@ -1,11 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const app = express();
-
 app.use(cors());
 
 app.get('/test', (req, res) => {
@@ -14,7 +12,6 @@ app.get('/test', (req, res) => {
 
 app.get('/proxy-image', async (req, res) => {
   const { url } = req.query;
-
   if (!url) {
     return res.status(400).send('No URL provided');
   }
@@ -25,9 +22,8 @@ app.get('/proxy-image', async (req, res) => {
       return res.status(response.status).send('Error fetching image: ' + response.statusText);
     }
 
-    // Use arrayBuffer() instead of buffer()
     const imageArrayBuffer = await response.arrayBuffer();
-    const imageBuffer = Buffer.from(imageArrayBuffer); // Convert ArrayBuffer to Buffer
+    const imageBuffer = Buffer.from(imageArrayBuffer);
     res.set('Content-Type', response.headers.get('content-type'));
     res.send(imageBuffer);
   } catch (error) {
@@ -36,7 +32,5 @@ app.get('/proxy-image', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Do not call app.listen() on Vercel
+module.exports = app;
