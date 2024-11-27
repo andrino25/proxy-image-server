@@ -13,6 +13,7 @@
     "express": "^4.21.1",
     "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2"
+    "nsfwjs": "^4.2.0"
   },
   "description": ""
 }
